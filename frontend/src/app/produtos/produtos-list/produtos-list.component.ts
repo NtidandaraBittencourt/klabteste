@@ -12,6 +12,10 @@ export interface Produto {
   preco: string;
   quantidadeDisponivel: number;
 }
+export interface Coluna {
+  title: string,
+  key: string
+}
 
 @Component({
   selector: 'app-produtos-list',
@@ -26,7 +30,7 @@ export class ProdutosListComponent {
   isErroTabela: boolean = false;
   errorMessage: string = '';
   data: Produto[] = [];
-  columns: any[] = [];
+  columns: string[] = [];
 
   httpClient = inject(HttpClient);
 
@@ -41,7 +45,7 @@ export class ProdutosListComponent {
         this.data = response;
         this.loading = false;
         this.isErroTabela = false
-        this.columns = this.determineColumns(response);
+        this.columns = this.columns = this.determineColumns(response).map(c => c.key);
       },
       (error) => {
         console.error('Erro ao carregar dados:', error);
@@ -52,7 +56,7 @@ export class ProdutosListComponent {
     );
   }
 
-  determineColumns(data: Produto[]): any[] {
+  determineColumns(produtos: Produto[]): Coluna[] {
     return [
       { title: 'Nome  do produto', key: 'nome' },
       { title: 'Quantidade total', key: 'quantidades' },

@@ -36,6 +36,15 @@ services:
      ports:
       - "4200:4200"
 
+  # frontend-tests:
+  #   build:
+  #     context: ./frontend/
+  #   command: ng test --watch=false --browsers=ChromeHeadless
+  #   depends_on:
+  #     - webserver
+  #   environment:
+  #     - CHROME_BIN=/usr/bin/chromium-browser
+
   webserver:
     image: nginx:alpine
     container_name: webserver

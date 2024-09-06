@@ -1,14 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TabelaComponentComponent } from './tabela-component.component';
+import { CommonModule } from '@angular/common';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { of } from 'rxjs';
 
 describe('TabelaComponentComponent', () => {
-  let component: TabelaComponentComponent;
-  let fixture: ComponentFixture<TabelaComponentComponent>;
+  let component: TabelaComponentComponent<any>;
+  let fixture: ComponentFixture<TabelaComponentComponent<any>>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TabelaComponentComponent]
+      imports: [CommonModule, TabelaComponentComponent, MatTableModule, MatPaginatorModule]
     })
     .compileComponents();
     
