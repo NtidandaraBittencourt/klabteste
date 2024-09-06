@@ -12,11 +12,29 @@ services:
 
   java:
      build: ./java/
+     volumes:
+      - ./java/src:/main
+     command: ./mvnw spring-boot:run
+
+  java-tests:
+    build:
+      context: ./java/
+    command: ["./mvnw", "test"]
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:[7000:5432]/postgres
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: example
 
   frontend:
      build: ./frontend/
      volumes:
       - ./frontend/src:/usr/src/app/src
+      - /usr/src/app/node_modules
+     command: ng serve --host 0.0.0.0 --poll 2000 --watch
+     ports:
+      - "4200:4200"
 
   webserver:
     image: nginx:alpine
