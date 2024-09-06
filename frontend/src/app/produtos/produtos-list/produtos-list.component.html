@@ -1,0 +1,9 @@
+<app-loading-component *ngIf="!isErroTabela && loading" [isLoading]="loading"></app-loading-component>
+
+<app-tabela-component *ngIf="!isErroTabela" [columns]="columns" [data]="data"></app-tabela-component>
+
+<div *ngIf="isErroTabela" class="error-message">
+    <h1>Oops! Algo deu errado.</h1>
+    <p>{{ errorMessage }}</p>
+    <button (click)="fetchData()">Tentar novamente</button>
+  </div>

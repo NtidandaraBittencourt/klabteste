@@ -11,4 +11,5 @@ import {HttpserviceModule} from "./modules/httpservice.module";
 })
 export class AppComponent {
   title = 'frontend';
+  
 }
